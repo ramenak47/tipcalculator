@@ -117,7 +117,7 @@ header h1 { font-family:'Syne',sans-serif; font-size:1.6rem; font-weight:800; li
 /* ROSTER ROWS — name+role on first line, hours on second on mobile */
 .roster-row { display:grid; grid-template-columns:1fr 32px; gap:6px; margin-bottom:10px; }
 .roster-row .row-top { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
-.roster-row .row-bottom { display:grid; grid-template-columns:1fr; gap:6px; }
+.roster-row .row-bottom { display:grid; grid-template-columns:1fr; gap:6px; width:100%; }
 @media (min-width:480px) {
   .roster-row { grid-template-columns:1.8fr 1.2fr 1.3fr 32px; gap:8px; align-items:center; }
   .roster-row .row-top { display:contents; }
@@ -461,7 +461,7 @@ function addStaffRow(name = '', role = 'floor', hours = '') {
       </select>
     </div>
     <div class="row-bottom">
-      <input type="number" placeholder="Hours this week" value="${hours}" class="hours-field" min="0" step="0.01">
+      <input type="number" placeholder="Hours this week" value="${hours}" class="hours-field" min="0" step="0.01" style="text-align:right;">
     </div>
     <button class="remove-btn" onclick="document.getElementById('staff-${id}').remove()">×</button>
   `;
