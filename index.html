@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Tip Pool Calculator</title>
-
-<!-- PWA / Home Screen -->
 <meta name="application-name" content="Tip Pool">
 <meta name="description" content="Weekly tip pool calculator for the restaurant team.">
 <meta name="theme-color" content="#1A1A18">
@@ -13,16 +11,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Tip Pool">
-
-<!-- Inline manifest (no extra file needed) -->
-<link rel="manifest" href="data:application/json,%7B%22name%22%3A%22Tip%20Pool%20Calculator%22%2C%22short_name%22%3A%22Tip%20Pool%22%2C%22description%22%3A%22Weekly%20tip%20pool%20calculator%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23F5F0E8%22%2C%22theme_color%22%3A%22%231A1A18%22%2C%22orientation%22%3A%22portrait%22%7D">
-
-<!-- App icon — inline SVG as data URL, works on all platforms -->
+<link rel="manifest" href="data:application/json,%7B%22name%22%3A%22Tip%20Pool%20Calculator%22%2C%22short_name%22%3A%22Tip%20Pool%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23F5F0E8%22%2C%22theme_color%22%3A%22%231A1A18%22%7D">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='80' fill='%231A1A18'/%3E%3Ccircle cx='256' cy='220' r='130' fill='none' stroke='%23C9A84C' stroke-width='28'/%3E%3Cpath d='M210 220 h92 M256 174 v92' stroke='%23E8420A' stroke-width='28' stroke-linecap='round'/%3E%3Cpath d='M140 380 h232' stroke='%23C9A84C' stroke-width='20' stroke-linecap='round'/%3E%3C/svg%3E">
-
-<!-- Apple touch icon (what shows on iPhone home screen) -->
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='80' fill='%231A1A18'/%3E%3Ccircle cx='256' cy='220' r='130' fill='none' stroke='%23C9A84C' stroke-width='28'/%3E%3Cpath d='M210 220 h92 M256 174 v92' stroke='%23E8420A' stroke-width='28' stroke-linecap='round'/%3E%3Cpath d='M140 380 h232' stroke='%23C9A84C' stroke-width='20' stroke-linecap='round'/%3E%3C/svg%3E">
-
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,41 +24,26 @@
   --intern: #6B21A8; --error: #DC2626;
   --stew: #92400E; --night: #854D0E;
 }
-
 html, body {
-  min-height: 100vh;
-  background: var(--bg);
-  font-family: 'DM Sans', sans-serif;
-  color: var(--ink);
-  font-size: 16px;
-  -webkit-text-size-adjust: 100%;
+  min-height: 100vh; background: var(--bg);
+  font-family: 'DM Sans', sans-serif; color: var(--ink);
+  font-size: 16px; -webkit-text-size-adjust: 100%;
 }
-
 .container {
-  max-width: 880px;
-  margin: 0 auto;
-  padding: 20px 16px 100px;
+  max-width: 880px; margin: 0 auto;
+  padding: 20px 16px;
   padding-left: max(16px, env(safe-area-inset-left));
   padding-right: max(16px, env(safe-area-inset-right));
   padding-bottom: max(100px, calc(80px + env(safe-area-inset-bottom)));
 }
-
-/* HEADER */
-header {
-  border-top: 3px solid var(--ink);
-  border-bottom: 1.5px solid var(--ink);
-  padding: 18px 0 16px;
-  margin-bottom: 20px;
-}
+header { border-top: 3px solid var(--ink); border-bottom: 1.5px solid var(--ink); padding: 18px 0 16px; margin-bottom: 20px; }
 header .tag { font-family:'Syne',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin-bottom:6px; }
 header h1 { font-family:'Syne',sans-serif; font-size:1.6rem; font-weight:800; line-height:1.1; }
 
-/* BLOCKS */
 .block { background:var(--white); border:1.5px solid var(--soft); padding:16px; margin-bottom:16px; }
 .block-title { font-family:'Syne',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--mgmt); margin-bottom:12px; display:flex; align-items:center; gap:8px; }
 .block-title .dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
 
-/* FIELDS — single column on mobile */
 .settings-grid { display:grid; grid-template-columns:1fr; gap:12px; }
 @media (min-width:480px) { .settings-grid { grid-template-columns:1fr 1fr; } }
 
@@ -81,50 +57,49 @@ header h1 { font-family:'Syne',sans-serif; font-size:1.6rem; font-weight:800; li
 }
 .field input:focus, .field select:focus { border-color:var(--accent); }
 
-/* POOL STRIP — stack on very small screens */
+/* Pool strip — 2 segments only */
 .pool-strip { display:flex; flex-direction:column; margin-top:14px; border:1.5px solid var(--soft); overflow:hidden; }
 @media (min-width:400px) { .pool-strip { flex-direction:row; } }
 .pool-seg { padding:10px 14px; font-family:'Syne',sans-serif; font-size:11px; font-weight:700; display:flex; flex-direction:row; align-items:center; justify-content:space-between; gap:8px; }
 @media (min-width:400px) { .pool-seg { flex-direction:column; align-items:flex-start; justify-content:flex-start; } }
 .pool-seg .seg-label { font-size:8px; letter-spacing:0.1em; text-transform:uppercase; opacity:0.65; white-space:nowrap; }
 .pool-seg .seg-val { font-size:15px; }
-.seg-stew  { background:#FFF3E0; color:var(--stew); border-bottom:1px solid #f5d0a0; }
-.seg-night { background:#FEF9C3; color:var(--night); border-bottom:1px solid #f5e0a0; }
-@media (min-width:400px) { .seg-stew,.seg-night { border-bottom:none; border-right:1px solid var(--soft); } }
-.seg-pool  { background:var(--ink); color:var(--gold); flex:1; }
+.seg-stew { background:#FFF3E0; color:var(--stew); }
+@media (min-width:400px) { .seg-stew { border-right:1px solid var(--soft); } }
+.seg-pool { background:var(--ink); color:var(--gold); flex:1; }
 
-/* STEWARDING */
+/* Stewarding — 5 people */
 .stew-names-row { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-bottom:6px; }
-@media (min-width:480px) { .stew-names-row { grid-template-columns:repeat(6,1fr); } }
-.stew-names-row input { border:1.5px solid #f5d0a0; background:#FFF3E0; padding:10px 6px; font-family:'DM Sans',sans-serif; font-size:13px; color:var(--stew); outline:none; text-align:center; width:100%; -webkit-appearance:none; }
+@media (min-width:480px) { .stew-names-row { grid-template-columns:repeat(5,1fr); } }
+.stew-names-row input {
+  border:1.5px solid #f5d0a0; background:#FFF3E0;
+  padding:10px 6px; font-family:'DM Sans',sans-serif; font-size:13px;
+  color:var(--stew); outline:none; text-align:center; width:100%;
+  -webkit-appearance:none;
+}
 .stew-names-row input:focus { border-color:var(--stew); }
-.stew-6 { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-top:8px; }
-@media (min-width:480px) { .stew-6 { grid-template-columns:repeat(6,1fr); } }
+.stew-5 { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-top:8px; }
+@media (min-width:480px) { .stew-5 { grid-template-columns:repeat(5,1fr); } }
 .stew-person { background:#FFF3E0; border:1.5px solid #f5d0a0; padding:10px 6px; text-align:center; }
 .stew-person .sp-name { font-family:'DM Sans',sans-serif; font-size:11px; color:var(--stew); margin-bottom:4px; min-height:28px; display:flex; align-items:center; justify-content:center; line-height:1.3; }
 .stew-person .sp-amount { font-family:'Syne',sans-serif; font-size:14px; font-weight:800; color:var(--stew); }
 
-/* SECTION HEADER */
 .section-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; flex-wrap:wrap; gap:8px; }
 .section-label { font-family:'Syne',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; }
 
-/* BUTTONS */
 .btn-add { background:var(--ink); color:var(--white); border:none; font-family:'Syne',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.06em; padding:10px 18px; cursor:pointer; transition:background 0.15s; -webkit-tap-highlight-color:transparent; }
 .btn-add:hover, .btn-add:active { background:var(--accent); }
 .btn-add.night { background:#854D0E; }
 .btn-add.night:hover, .btn-add.night:active { background:#6b3a08; }
 
-/* ROSTER ROWS — name+role on first line, hours on second on mobile */
+/* Roster rows */
 .roster-row { display:grid; grid-template-columns:1fr 44px; gap:6px; margin-bottom:12px; align-items:start; }
 .roster-row .row-top { display:flex; flex-direction:column; gap:6px; }
-.roster-row .row-bottom { display:none; }
 @media (min-width:540px) {
   .roster-row { grid-template-columns:1.8fr 1.2fr 1.2fr 44px; align-items:center; }
   .roster-row .row-top { flex-direction:row; gap:6px; }
 }
-
 .night-row-entry { display:grid; grid-template-columns:1fr 1fr 32px; gap:8px; align-items:center; margin-bottom:8px; }
-
 .roster-row input, .roster-row select,
 .night-row-entry input {
   border:1.5px solid var(--soft); background:var(--white);
@@ -136,13 +111,12 @@ header h1 { font-family:'Syne',sans-serif; font-size:1.6rem; font-weight:800; li
 .night-row-entry input:focus { border-color:var(--night); }
 .roster-row select { font-size:12px; padding:12px 8px; }
 .roster-row input:focus, .roster-row select:focus { border-color:var(--accent); }
-
 .role-floor   { border-left:3px solid var(--floor)   !important; }
 .role-kitchen { border-left:3px solid var(--kitchen) !important; }
 .role-kshort  { border-left:3px solid var(--kshort)  !important; }
 .role-intern  { border-left:3px solid var(--intern)  !important; }
 .role-mgmt    { border-left:3px solid var(--mgmt)    !important; }
-
+.role-night   { border-left:3px solid var(--night)   !important; }
 .remove-btn {
   background:none; border:1.5px solid var(--soft); color:#bbb;
   width:44px; height:44px; cursor:pointer; font-size:20px;
@@ -152,7 +126,6 @@ header h1 { font-family:'Syne',sans-serif; font-size:1.6rem; font-weight:800; li
 }
 .remove-btn:hover, .remove-btn:active { border-color:var(--error); color:var(--error); }
 
-/* CALC BUTTONS */
 .calc-row { margin:20px 0; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
 .btn-calc {
   background:var(--accent); color:white; border:none;
@@ -169,18 +142,13 @@ header h1 { font-family:'Syne',sans-serif; font-size:1.6rem; font-weight:800; li
   -webkit-tap-highlight-color:transparent;
 }
 
-/* RESULTS */
 #results { display:none; margin-top:4px; }
 .results-header { background:var(--ink); color:var(--bg); padding:14px 16px; }
 .results-header .rh-title { font-family:'Syne',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; }
 .results-header .rh-pool { font-family:'DM Sans',sans-serif; font-size:10px; color:rgba(245,240,232,0.45); margin-top:3px; line-height:1.5; }
-
 .results-section-label { font-family:'Syne',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; padding:8px 14px; }
 .rs-main  { background:rgba(26,26,24,0.05); color:var(--mgmt); border-bottom:1px solid var(--soft); }
-.rs-night { background:#FEFCE8; color:var(--night); border-bottom:1px solid #f5e0a0; }
 .rs-stew  { background:#FFF3E0; color:var(--stew); border-bottom:1px solid #f5d0a0; }
-
-/* Results tables — scrollable on mobile */
 .table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
 table.rtable { width:100%; border-collapse:collapse; min-width:400px; }
 table.rtable thead tr { background:rgba(26,26,24,0.04); }
@@ -189,12 +157,9 @@ table.rtable tbody tr { border-bottom:1px solid var(--soft); }
 table.rtable tbody td { padding:10px 12px; font-size:14px; vertical-align:middle; }
 table.rtable .name-cell { font-weight:600; }
 table.rtable .pay-cell { font-family:'Syne',sans-serif; font-weight:800; font-size:16px; color:var(--accent); white-space:nowrap; }
-table.rtable .pay-night { color:var(--night); }
-table.rtable .pay-stew  { color:var(--stew); }
+table.rtable .pay-stew { color:var(--stew); }
 table.rtable tfoot tr { background:var(--ink); }
 table.rtable tfoot td { padding:11px 12px; font-family:'Syne',sans-serif; font-weight:800; font-size:13px; color:var(--gold); }
-
-/* Payout card view on small screens */
 @media (max-width:479px) {
   table.rtable { min-width:unset; }
   table.rtable thead { display:none; }
@@ -207,20 +172,16 @@ table.rtable tfoot td { padding:11px 12px; font-family:'Syne',sans-serif; font-w
   table.rtable tfoot td { padding:10px 12px; font-size:13px; }
   .table-wrap { overflow-x:unset; }
 }
-
 .role-badge { display:inline-block; font-family:'Syne',sans-serif; font-size:8px; font-weight:700; padding:2px 7px; color:white; }
-
 .check-row { padding:12px 16px; font-family:'Syne',sans-serif; font-size:12px; font-weight:700; line-height:1.5; }
 .check-ok  { background:#F0FAF4; color:var(--kitchen); border:1.5px solid #b8dfc9; }
 .check-err { background:#FDF0EE; color:var(--error);   border:1.5px solid #f0c4bc; }
 .export-row { display:flex; gap:10px; padding:14px 16px; background:var(--bg); border-top:1.5px solid var(--soft); flex-wrap:wrap; }
 .btn-export { font-family:'Syne',sans-serif; font-size:13px; font-weight:700; letter-spacing:0.06em; padding:13px 22px; border:none; cursor:pointer; flex:1; min-width:140px; text-align:center; -webkit-tap-highlight-color:transparent; }
 .btn-export.pdf  { background:var(--ink); color:var(--bg); }
-.btn-export.pdf:active  { opacity:0.8; }
+.btn-export.pdf:active { opacity:0.8; }
 .btn-export.xlsx { background:var(--kitchen); color:white; }
 .btn-export.xlsx:active { opacity:0.8; }
-
-/* LEGEND */
 .legend { margin-top:28px; }
 .legend-title { font-family:'Syne',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#888; margin-bottom:10px; }
 .legend-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
@@ -229,13 +190,11 @@ table.rtable tfoot td { padding:11px 12px; font-family:'Syne',sans-serif; font-w
 .legend-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
 .legend-text { font-size:11px; line-height:1.4; }
 .legend-text strong { font-family:'Syne',sans-serif; font-size:10px; display:block; }
-
 @media print {
   .block, .calc-row, .legend, header .tag { display:none; }
   #results { display:block !important; }
   body { background:white; }
 }
-
 </style>
 </head>
 <body>
@@ -253,27 +212,26 @@ table.rtable tfoot td { padding:11px 12px; font-family:'Syne',sans-serif; font-w
     <div class="field"><label>Week number</label><input type="number" id="week-num" value="1" min="1" max="53"></div>
     <div class="field"><label>Thursday date</label><input type="date" id="week-date"></div>
     <div class="field"><label>Total tips collected (€)</label><input type="number" id="total-tips" value="1000" min="0" step="0.01"></div>
-    <div class="field"><label>Fixed stewarding deduction (€)</label><input type="number" id="stew-fixed" value="60" min="0" step="0.01"></div>
+    <div class="field"><label>Fixed stewarding deduction (€)</label><input type="number" id="stew-fixed" value="50" min="0" step="0.01"></div>
   </div>
   <div class="pool-strip">
-    <div class="pool-seg seg-stew"><span class="seg-label">Stewarding (fixed)</span><span class="seg-val" id="seg-stew-val">€60.00</span></div>
-    <div class="pool-seg seg-night"><span class="seg-label">Night stewarding (10%)</span><span class="seg-val" id="seg-night-val">€94.00</span></div>
-    <div class="pool-seg seg-pool"><span class="seg-label">Weighted pool</span><span class="seg-val" id="seg-pool-val">€846.00</span></div>
+    <div class="pool-seg seg-stew"><span class="seg-label">Stewarding (fixed)</span><span class="seg-val" id="seg-stew-val">€50.00</span></div>
+    <div class="pool-seg seg-pool"><span class="seg-label">Weighted pool</span><span class="seg-val" id="seg-pool-val">€950.00</span></div>
   </div>
 </div>
 
-<!-- STEWARDING — 6 FIXED PEOPLE -->
+<!-- STEWARDING — 5 PEOPLE -->
 <div class="block">
-  <div class="block-title"><div class="dot" style="background:var(--stew)"></div>Stewarding — €10 each (fixed)</div>
+  <div class="block-title"><div class="dot" style="background:var(--stew)"></div>Stewarding — fixed split between 5</div>
   <div class="stew-names-row" id="stew-names-row"></div>
-  <div class="stew-6" id="stew-cards"></div>
-  <p style="font-size:11px;color:#aaa;font-style:italic;margin-top:10px;">Names are editable. Amount per person = fixed deduction ÷ 6. No hours needed.</p>
+  <div class="stew-5" id="stew-cards"></div>
+  <p style="font-size:11px;color:#aaa;font-style:italic;margin-top:10px;">Names are editable. Amount per person = fixed deduction ÷ 5. No hours needed.</p>
 </div>
 
 <!-- NIGHT STEWARDING -->
 <div class="block">
-  <div class="block-title"><div class="dot" style="background:var(--night)"></div>Night stewarding — 10% of remainder, split by hours</div>
-  <div style="font-size:13px;color:#888;margin-bottom:14px;line-height:1.6;">Add whoever did night stewarding this week and how many hours they worked. The 10% pot gets divided proportionally by their hours.</div>
+  <div class="block-title"><div class="dot" style="background:var(--night)"></div>Night stewarding — × 0.50 in weighted pool</div>
+  <div style="font-size:13px;color:#888;margin-bottom:14px;line-height:1.6;">Add whoever did night stewarding this week and their hours. They participate in the main weighted pool at half the floor rate (× 0.50).</div>
   <div class="section-header">
     <span class="section-label" style="color:var(--night)">Night stewarding staff</span>
     <button class="btn-add night" onclick="addNightRow()">+ Add person</button>
@@ -284,7 +242,7 @@ table.rtable tfoot td { padding:11px 12px; font-family:'Syne',sans-serif; font-w
 <!-- MAIN STAFF ROSTER -->
 <div class="block">
   <div class="block-title"><div class="dot" style="background:var(--floor)"></div>Staff roster — weighted pool</div>
-  <div style="font-size:13px;color:#888;margin-bottom:14px;line-height:1.6;">Enter hours worked this week per person. Leave blank or zero if they didn't work. Roles are pre-set but can be changed.</div>
+  <div style="font-size:13px;color:#888;margin-bottom:14px;line-height:1.6;">Enter hours worked this week per person. Leave blank or zero if they didn't work.</div>
   <div class="section-header">
     <span class="section-label" style="color:var(--ink)">Staff this week</span>
     <button class="btn-add" onclick="addStaffRow()">+ Add person</button>
@@ -300,48 +258,31 @@ table.rtable tfoot td { padding:11px 12px; font-family:'Syne',sans-serif; font-w
 <!-- RESULTS -->
 <div id="results">
   <div class="results-header">
-    <div>
-      <div class="rh-title" id="rh-title">Week 1 results</div>
-      <div class="rh-pool" id="rh-pool"></div>
-    </div>
+    <div class="rh-title" id="rh-title">Week 1 results</div>
+    <div class="rh-pool" id="rh-pool"></div>
   </div>
 
-  <!-- Main pool results -->
   <div class="results-section-label rs-main">Staff — weighted pool</div>
   <div class="table-wrap">
-  <table class="rtable">
-    <thead><tr><th>Name</th><th>Role</th><th>Hours</th><th>Mult.</th><th>Weighted</th><th>Payout</th></tr></thead>
-    <tbody id="res-main-body"></tbody>
-    <tfoot id="res-main-foot"></tfoot>
-  </table>
+    <table class="rtable">
+      <thead><tr><th>Name</th><th>Role</th><th>Hours</th><th>Mult.</th><th>Weighted</th><th>Payout</th></tr></thead>
+      <tbody id="res-main-body"></tbody>
+      <tfoot id="res-main-foot"></tfoot>
+    </table>
   </div>
 
-  <!-- Night stewarding results -->
-  <div class="results-section-label rs-night" id="res-night-label">Night stewarding — 10% pot</div>
-  <div class="table-wrap">
-  <table class="rtable" id="res-night-table">
-    <thead><tr><th>Name</th><th>Hours</th><th>Share</th><th>Payout</th></tr></thead>
-    <tbody id="res-night-body"></tbody>
-    <tfoot id="res-night-foot"></tfoot>
-  </table>
-  </div>
-
-  <!-- Stewarding results -->
   <div class="results-section-label rs-stew">Stewarding — fixed €10 each</div>
   <div class="table-wrap">
-  <table class="rtable">
-    <thead><tr><th>Name</th><th>Amount</th></tr></thead>
-    <tbody id="res-stew-body"></tbody>
-  </table>
+    <table class="rtable">
+      <thead><tr><th>Name</th><th>Amount</th></tr></thead>
+      <tbody id="res-stew-body"></tbody>
+    </table>
   </div>
 
-<!-- Grand total check -->
   <div id="check-row" class="check-row"></div>
-
-  <!-- Export buttons -->
   <div class="export-row">
     <button class="btn-export pdf" onclick="exportPDF()">⬇ Save as PDF</button>
-    <button class="btn-export xlsx" onclick="exportExcel()">⬇ Download Excel</button>
+    <button class="btn-export xlsx" onclick="exportExcel()">⬇ Download CSV</button>
   </div>
 </div>
 
@@ -350,24 +291,26 @@ table.rtable tfoot td { padding:11px 12px; font-family:'Syne',sans-serif; font-w
   <div class="legend-title">Multiplier reference</div>
   <div class="legend-grid">
     <div class="legend-item"><div class="legend-dot" style="background:var(--floor)"></div><div class="legend-text"><strong>Floor</strong>× 1.0 — full rate</div></div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--kitchen)"></div><div class="legend-text"><strong>Kitchen (full)</strong>× 0.792 — 7.6 ÷ 9.6</div></div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--kitchen)"></div><div class="legend-text"><strong>Kitchen (full)</strong>× 0.772 — 7.6 ÷ 9.85</div></div>
     <div class="legend-item"><div class="legend-dot" style="background:var(--kshort)"></div><div class="legend-text"><strong>Kitchen (short)</strong>× 1.0 — shift ≤ 7.6h</div></div>
     <div class="legend-item"><div class="legend-dot" style="background:var(--intern)"></div><div class="legend-text"><strong>Intern</strong>× 1.0 — full rate</div></div>
     <div class="legend-item"><div class="legend-dot" style="background:var(--mgmt)"></div><div class="legend-text"><strong>Management</strong>× 0.50 — half rate</div></div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--night)"></div><div class="legend-text"><strong>Night stewarding</strong>× 0.50 — half rate</div></div>
   </div>
 </div>
 
-</div><!-- /container -->
+</div>
 
 <script>
-const KITCHEN_RATIO = 7.6 / 9.6;
+const KITCHEN_RATIO = 7.6 / 9.85;
 
 const ROLES = [
-  { value: 'floor',   label: 'Floor',          mult: 1.0,           color: '#1D3557', cls: 'role-floor'   },
-  { value: 'kitchen', label: 'Kitchen (full)',  mult: KITCHEN_RATIO, color: '#2D6A4F', cls: 'role-kitchen' },
-  { value: 'kshort',  label: 'Kitchen (short)', mult: 1.0,           color: '#1A7A52', cls: 'role-kshort'  },
-  { value: 'intern',  label: 'Intern',          mult: 1.0,           color: '#6B21A8', cls: 'role-intern'  },
-  { value: 'mgmt',    label: 'Management',      mult: 0.5,           color: '#6B7280', cls: 'role-mgmt'    },
+  { value: 'floor',   label: 'Floor',          mult: 1.0,          color: '#1D3557', cls: 'role-floor'   },
+  { value: 'kitchen', label: 'Kitchen (full)',  mult: KITCHEN_RATIO,color: '#2D6A4F', cls: 'role-kitchen' },
+  { value: 'kshort',  label: 'Kitchen (short)', mult: 1.0,          color: '#1A7A52', cls: 'role-kshort'  },
+  { value: 'intern',  label: 'Intern',          mult: 1.0,          color: '#6B21A8', cls: 'role-intern'  },
+  { value: 'mgmt',    label: 'Management',      mult: 0.5,          color: '#6B7280', cls: 'role-mgmt'    },
+  { value: 'night',   label: 'Night Stew.',     mult: 0.5,          color: '#854D0E', cls: 'role-night'   },
 ];
 const ROLE_MAP = Object.fromEntries(ROLES.map(r => [r.value, r]));
 
@@ -391,7 +334,7 @@ const DEFAULT_STAFF = [
   { name: 'Robbert',          role: 'mgmt'    },
 ];
 
-const DEFAULT_STEWARDING = ['Stew 1','Stew 2','Stew 3','Stew 4','Stew 5','Stew 6'];
+const DEFAULT_STEWARDING = ['Stew 1','Stew 2','Stew 3','Stew 4','Stew 5'];
 
 let staffId = 0, nightId = 0;
 
@@ -399,23 +342,20 @@ let staffId = 0, nightId = 0;
 function updatePoolPreview() {
   const tips  = parseFloat(document.getElementById('total-tips').value) || 0;
   const fixed = parseFloat(document.getElementById('stew-fixed').value) || 0;
-  const after = Math.max(0, tips - fixed);
-  const night = after * 0.10;
-  const pool  = after - night;
-  document.getElementById('seg-stew-val').textContent  = '€' + fixed.toFixed(2);
-  document.getElementById('seg-night-val').textContent = '€' + night.toFixed(2);
-  document.getElementById('seg-pool-val').textContent  = '€' + pool.toFixed(2);
+  const pool  = Math.max(0, tips - fixed);
+  document.getElementById('seg-stew-val').textContent = '€' + fixed.toFixed(2);
+  document.getElementById('seg-pool-val').textContent = '€' + pool.toFixed(2);
   updateStewCards();
 }
 document.getElementById('total-tips').addEventListener('input', updatePoolPreview);
 document.getElementById('stew-fixed').addEventListener('input', updatePoolPreview);
 
-// ── STEWARDING 6 PEOPLE ───────────────────────────────────────
+// ── STEWARDING 5 PEOPLE ───────────────────────────────────────
 function buildStewSection() {
   const namesRow = document.getElementById('stew-names-row');
   const cards    = document.getElementById('stew-cards');
   namesRow.innerHTML = '';
-  cards.innerHTML = '';
+  cards.innerHTML    = '';
   DEFAULT_STEWARDING.forEach((name, i) => {
     const inp = document.createElement('input');
     inp.type = 'text'; inp.value = name; inp.id = `stew-name-${i}`;
@@ -432,8 +372,8 @@ function buildStewSection() {
 
 function updateStewCards() {
   const fixed = parseFloat(document.getElementById('stew-fixed').value) || 0;
-  const each  = fixed / 6;
-  for (let i = 0; i < 6; i++) {
+  const each  = fixed / 5;
+  for (let i = 0; i < 5; i++) {
     const n = document.getElementById(`stew-name-${i}`)?.value || `Person ${i+1}`;
     const nameEl = document.getElementById(`stew-card-name-${i}`);
     const amtEl  = document.getElementById(`stew-card-amt-${i}`);
@@ -465,31 +405,28 @@ function addStaffRow(name = '', role = 'floor', hours = '') {
   const div = document.createElement('div');
   div.className = 'roster-row'; div.id = `staff-${id}`;
   div.innerHTML = `
-  <div class="row-top">
-    <input type="text" placeholder="Name" value="${name}" class="name-input">
-    <select class="role-select ${ROLE_MAP[role].cls}" onchange="this.className='role-select '+(window.ROLE_MAP[this.value]?.cls||'')">
-      ${roleOptions(role)}
-    </select>
-    <input type="number" placeholder="Hours this week" value="${hours}" class="hours-field" min="0" step="0.01" style="text-align:right;">
-  </div>
-  <button class="remove-btn" onclick="document.getElementById('staff-${id}').remove()">×</button>
-`;
+    <div class="row-top">
+      <input type="text" placeholder="Name" value="${name}" class="name-input">
+      <select class="role-select ${ROLE_MAP[role].cls}" onchange="this.className='role-select '+(window.ROLE_MAP[this.value]?.cls||'')">
+        ${roleOptions(role)}
+      </select>
+      <input type="number" placeholder="Hours this week" value="${hours}" class="hours-field" min="0" step="0.01" style="text-align:right;">
+    </div>
+    <button class="remove-btn" onclick="document.getElementById('staff-${id}').remove()">×</button>
+  `;
   document.getElementById('staff-rows').appendChild(div);
 }
 
 // ── CALCULATE ─────────────────────────────────────────────────
 function calculate() {
-  const tips  = parseFloat(document.getElementById('total-tips').value) || 0;
-  const fixed = parseFloat(document.getElementById('stew-fixed').value) || 0;
+  const tips    = parseFloat(document.getElementById('total-tips').value) || 0;
+  const fixed   = parseFloat(document.getElementById('stew-fixed').value) || 0;
   const weekNum  = document.getElementById('week-num').value;
   const weekDate = document.getElementById('week-date').value;
+  const pool    = Math.max(0, tips - fixed);
+  const stewEach = fixed / 5;
 
-  const after      = Math.max(0, tips - fixed);
-  const nightTotal = after * 0.10;
-  const poolTotal  = after - nightTotal;
-  const stewEach   = fixed / 6;
-
-  // collect staff
+  // Collect main staff
   const staff = [];
   document.querySelectorAll('.roster-row').forEach(row => {
     const name  = row.querySelector('.name-input').value.trim();
@@ -501,29 +438,27 @@ function calculate() {
     }
   });
 
-  if (staff.length === 0) { alert('Add at least one person with hours.'); return; }
-
-  const totalWeighted = staff.reduce((s, p) => s + p.weighted, 0);
-  const rate = totalWeighted > 0 ? poolTotal / totalWeighted : 0;
-  staff.forEach(p => { p.payout = p.weighted * rate; });
-
-  // collect night stewarding
-  const nightStaff = [];
+  // Collect night stewarding — inject into main pool at ×0.50
   document.querySelectorAll('.night-row-entry').forEach(row => {
     const name  = row.querySelector('.night-name').value.trim();
     const hours = parseFloat(row.querySelector('.night-hours').value) || 0;
-    if (name && hours > 0) nightStaff.push({ name, hours });
+    if (name && hours > 0) {
+      staff.push({ name, role: 'night', hours, mult: 0.5, weighted: hours * 0.5 });
+    }
   });
-  const totalNightHrs = nightStaff.reduce((s, p) => s + p.hours, 0);
-  const nightRate = totalNightHrs > 0 ? nightTotal / totalNightHrs : 0;
-  nightStaff.forEach(p => { p.payout = p.hours * nightRate; });
 
-  // stewarding names
-  const stewNames = Array.from({length:6}, (_,i) =>
+  if (staff.length === 0) { alert('Add at least one person with hours.'); return; }
+
+  const totalWeighted = staff.reduce((s, p) => s + p.weighted, 0);
+  const rate = totalWeighted > 0 ? pool / totalWeighted : 0;
+  staff.forEach(p => { p.payout = p.weighted * rate; });
+
+  // Stewarding names
+  const stewNames = Array.from({length:5}, (_,i) =>
     document.getElementById(`stew-name-${i}`)?.value.trim() || `Person ${i+1}`
   );
 
-  // ── RENDER MAIN ──
+  // Render main results
   const mainBody = document.getElementById('res-main-body');
   mainBody.innerHTML = '';
   staff.forEach(p => {
@@ -539,35 +474,10 @@ function calculate() {
     `;
     mainBody.appendChild(tr);
   });
-  const mainFoot = document.getElementById('res-main-foot');
-  mainFoot.innerHTML = `<tr><td colspan="4">TOTAL</td><td>${totalWeighted.toFixed(2)}h</td><td>€${poolTotal.toFixed(2)}</td></tr>`;
+  document.getElementById('res-main-foot').innerHTML =
+    `<tr><td colspan="4">TOTAL</td><td>${totalWeighted.toFixed(2)}h</td><td>€${pool.toFixed(2)}</td></tr>`;
 
-  // ── RENDER NIGHT ──
-  const nightBody = document.getElementById('res-night-body');
-  const nightFoot = document.getElementById('res-night-foot');
-  const nightLabel = document.getElementById('res-night-label');
-  const nightTable = document.getElementById('res-night-table');
-  nightBody.innerHTML = '';
-
-  if (nightStaff.length > 0) {
-    nightLabel.style.display = '';
-    nightTable.style.display = '';
-    nightStaff.forEach(p => {
-      const share = totalNightHrs > 0 ? (p.hours / totalNightHrs * 100).toFixed(1) : '0.0';
-      const tr = document.createElement('tr');
-      tr.innerHTML = `<td class="name-cell" data-label="Name">${p.name}</td><td data-label="Hours">${p.hours.toFixed(2)}h</td><td data-label="Share">${share}%</td><td class="pay-cell pay-night" data-label="Payout">€${p.payout.toFixed(2)}</td>`;
-      nightBody.appendChild(tr);
-    });
-    nightFoot.innerHTML = `<tr><td colspan="3">TOTAL night stewarding pot</td><td>€${nightTotal.toFixed(2)}</td></tr>`;
-  } else {
-    // no night staff entered — show unallocated warning
-    nightLabel.style.display = '';
-    nightTable.style.display = '';
-    nightBody.innerHTML = `<tr><td colspan="4" style="color:#999;font-style:italic;padding:12px 14px;">No night stewarding staff entered — €${nightTotal.toFixed(2)} unallocated. Add people above.</td></tr>`;
-    nightFoot.innerHTML = '';
-  }
-
-  // ── RENDER STEWARDING ──
+  // Render stewarding
   const stewBody = document.getElementById('res-stew-body');
   stewBody.innerHTML = '';
   stewNames.forEach(name => {
@@ -576,7 +486,7 @@ function calculate() {
     stewBody.appendChild(tr);
   });
 
-  // ── HEADER ──
+  // Header
   let dateStr = '';
   if (weekDate) {
     const d = new Date(weekDate);
@@ -584,18 +494,13 @@ function calculate() {
     dateStr = ` · ${d.toLocaleDateString('en-GB',{day:'numeric',month:'short'})} – ${sun.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}`;
   }
   document.getElementById('rh-title').textContent = `Week ${weekNum}${dateStr}`;
-  document.getElementById('rh-pool').textContent  = `Pool €${tips.toFixed(2)} → €${poolTotal.toFixed(2)} staff pool · €${nightTotal.toFixed(2)} night stewarding · €${fixed.toFixed(2)} stewarding · Rate: €${rate.toFixed(4)}/weighted hr`;
+  document.getElementById('rh-pool').textContent  = `Pool €${tips.toFixed(2)} → €${pool.toFixed(2)} weighted pool + €${fixed.toFixed(2)} stewarding · Rate: €${rate.toFixed(4)}/weighted hr`;
 
-  // ── CHECK ──
-  const nightPaid = nightStaff.reduce((s,p)=>s+p.payout,0);
-  const totalOut  = staff.reduce((s,p)=>s+p.payout,0) + nightPaid + fixed;
+  // Check
+  const totalOut = staff.reduce((s,p)=>s+p.payout,0) + fixed;
+  const diff = Math.abs(totalOut - tips);
   const check = document.getElementById('check-row');
-  const diff  = Math.abs(totalOut - tips);
-
-  if (nightStaff.length === 0) {
-    check.className = 'check-row check-err';
-    check.textContent = `⚠️ Night stewarding pot (€${nightTotal.toFixed(2)}) has no recipients — add night stewarding staff above.`;
-  } else if (diff < 0.02) {
+  if (diff < 0.02) {
     check.className = 'check-row check-ok';
     check.textContent = `✅ Total matches — €${totalOut.toFixed(2)} distributed from €${tips.toFixed(2)} pool`;
   } else {
@@ -604,87 +509,49 @@ function calculate() {
   }
 
   document.getElementById('results').style.display = 'block';
-  document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.getElementById('results').scrollIntoView({ behavior:'smooth', block:'start' });
 }
-
 
 // ── EXPORT PDF ────────────────────────────────────────────────
-function exportPDF() {
-  window.print();
-}
+function exportPDF() { window.print(); }
 
-// ── EXPORT EXCEL ──────────────────────────────────────────────
+// ── EXPORT CSV ────────────────────────────────────────────────
 function exportExcel() {
   const weekNum  = document.getElementById('week-num').value;
   const weekDate = document.getElementById('week-date').value;
   const tips     = parseFloat(document.getElementById('total-tips').value) || 0;
   const fixed    = parseFloat(document.getElementById('stew-fixed').value) || 0;
-  const after    = Math.max(0, tips - fixed);
-  const night    = after * 0.10;
-  const pool     = after - night;
-  const stewEach = fixed / 6;
+  const pool     = Math.max(0, tips - fixed);
+  const stewEach = fixed / 5;
 
-  // Build CSV content (opens in Excel on any device)
-  let csv = '';
-
-  // Header info
-  csv += `Tip Pool — Week ${weekNum}\n`;
+  let csv = `Tip Pool — Week ${weekNum}\n`;
   if (weekDate) {
     const d = new Date(weekDate);
     const sun = new Date(d); sun.setDate(d.getDate() + 3);
     csv += `${d.toLocaleDateString('en-GB')} – ${sun.toLocaleDateString('en-GB')}\n`;
   }
-  csv += `Total tips,€${tips.toFixed(2)}\n`;
-  csv += `Stewarding deduction,€${fixed.toFixed(2)}\n`;
-  csv += `Night stewarding pot (10%),€${night.toFixed(2)}\n`;
-  csv += `Staff pool,€${pool.toFixed(2)}\n`;
-  csv += '\n';
+  csv += `Total tips,€${tips.toFixed(2)}\nStewarding deduction,€${fixed.toFixed(2)}\nWeighted pool,€${pool.toFixed(2)}\n\n`;
 
-  // Staff pool
-  csv += 'STAFF — WEIGHTED POOL\n';
-  csv += 'Name,Role,Hours,Multiplier,Weighted Hours,Payout\n';
+  csv += 'STAFF — WEIGHTED POOL\nName,Role,Hours,Multiplier,Weighted Hours,Payout\n';
   document.querySelectorAll('#res-main-body tr').forEach(tr => {
     const cells = tr.querySelectorAll('td');
-    if (cells.length >= 6) {
+    if (cells.length >= 6)
       csv += `${cells[0].textContent},${cells[1].textContent.trim()},${cells[2].textContent},${cells[3].textContent},${cells[4].textContent},${cells[5].textContent}\n`;
-    }
   });
-  const mainFoot = document.querySelector('#res-main-foot td:last-child');
-  if (mainFoot) csv += `,,,,Total,${mainFoot.textContent}\n`;
-  csv += '\n';
+  const mf = document.querySelector('#res-main-foot td:last-child');
+  if (mf) csv += `,,,,Total,${mf.textContent}\n\n`;
 
-  // Night stewarding
-  csv += 'NIGHT STEWARDING\n';
-  csv += 'Name,Hours,Share,Payout\n';
-  document.querySelectorAll('#res-night-body tr').forEach(tr => {
-    const cells = tr.querySelectorAll('td');
-    if (cells.length >= 4) {
-      csv += `${cells[0].textContent},${cells[1].textContent},${cells[2].textContent},${cells[3].textContent}\n`;
-    }
-  });
-  csv += `,,Total,€${night.toFixed(2)}\n\n`;
-
-  // Stewarding fixed
-  csv += 'STEWARDING — FIXED\n';
-  csv += 'Name,Amount\n';
+  csv += 'STEWARDING — FIXED\nName,Amount\n';
   document.querySelectorAll('#res-stew-body tr').forEach(tr => {
     const cells = tr.querySelectorAll('td');
-    if (cells.length >= 2) {
-      csv += `${cells[0].textContent},${cells[1].textContent}\n`;
-    }
+    if (cells.length >= 2) csv += `${cells[0].textContent},${cells[1].textContent}\n`;
   });
-  csv += `Total,€${fixed.toFixed(2)}\n\n`;
+  csv += `Total,€${fixed.toFixed(2)}\n\nGRAND TOTAL,€${tips.toFixed(2)}\n`;
 
-  // Grand total
-  csv += `GRAND TOTAL,€${tips.toFixed(2)}\n`;
-
-  // Download
-  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const blob = new Blob([csv], { type:'text/csv;charset=utf-8;' });
   const url  = URL.createObjectURL(blob);
   const a    = document.createElement('a');
-  a.href     = url;
-  a.download = `tips-week-${weekNum}.csv`;
-  a.click();
+  a.href = url; a.download = `tips-week-${weekNum}.csv`; a.click();
   URL.revokeObjectURL(url);
 }
 
@@ -695,7 +562,7 @@ function resetAll() {
   document.getElementById('night-rows').innerHTML  = '';
   document.getElementById('results').style.display = 'none';
   document.getElementById('total-tips').value = '1000';
-  document.getElementById('stew-fixed').value = '60';
+  document.getElementById('stew-fixed').value = '50';
   DEFAULT_STAFF.forEach(p => addStaffRow(p.name, p.role, ''));
   buildStewSection();
   updatePoolPreview();
@@ -708,35 +575,19 @@ function resetAll() {
   const thu   = new Date(today);
   thu.setDate(today.getDate() + diff);
   document.getElementById('week-date').value = thu.toISOString().split('T')[0];
+  resetAll();
 })();
 
-resetAll();
-
-// ── SERVICE WORKER (PWA offline support) ──────────────────────
+// ── SERVICE WORKER ────────────────────────────────────────────
 if ('serviceWorker' in navigator) {
-  // Inline service worker as a blob — no sw.js file needed
   const swCode = `
-    const CACHE = 'tip-pool-v1';
-    const ASSETS = [self.location.href];
-    self.addEventListener('install', e => {
-      e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));
-      self.skipWaiting();
-    });
-    self.addEventListener('activate', e => {
-      e.waitUntil(caches.keys().then(keys =>
-        Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
-      ));
-      self.clients.claim();
-    });
-    self.addEventListener('fetch', e => {
-      e.respondWith(
-        caches.match(e.request).then(cached => cached || fetch(e.request).catch(() => cached))
-      );
-    });
+    const CACHE='tip-pool-v2';
+    self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll([self.location.href])));self.skipWaiting();});
+    self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))));self.clients.claim();});
+    self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(cached=>cached||fetch(e.request).catch(()=>cached)));});
   `;
-  const blob = new Blob([swCode], { type: 'application/javascript' });
-  const swUrl = URL.createObjectURL(blob);
-  navigator.serviceWorker.register(swUrl).catch(() => {});
+  const blob = new Blob([swCode], { type:'application/javascript' });
+  navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});
 }
 </script>
 </body>
